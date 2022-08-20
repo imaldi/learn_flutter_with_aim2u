@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_with_aim2u/screens/my_home_screen.dart';
 
-// tes amend ke origin
+// tes commit local tanpa push lalu amend
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
