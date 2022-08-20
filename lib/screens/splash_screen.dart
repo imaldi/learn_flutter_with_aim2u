@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_with_aim2u/screens/my_home_screen.dart';
+import 'package:learn_flutter_with_aim2u/screens/register_screen.dart';
 
 // tes commit local tanpa push lalu amend
 class SplashScreen extends StatefulWidget {
@@ -19,7 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
             ()=>Navigator.pushReplacement(context,
             MaterialPageRoute(builder:
                 (context) =>
-                    const MyHomePage(title: 'Flutter Demo Home Page')
+                    const RegisterScreen()
+                    // const MyHomeScreen(title: 'Flutter Demo Home Page')
             )
         )
     );
