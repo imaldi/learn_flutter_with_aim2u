@@ -73,6 +73,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter() {
+    /// setState ini ibarat tombol refresh untuk StatefulWidget, setiap dipanggil akan merefresh widget
+    /// kalau kita cuma ubah value tanpa panggil setState, tampilan di layar ga akan berubah karena method build ga terpanggil lagi
+    setState(() {
+      _counter--;
+    });
+  }
+
   /// 7. build method
   /// ini lifecycle utama dari aplikasi Flutter, tempat widget benar2 di build untuk tampil di layar,
   /// method ini terpanggil setiap kali setState dipanggil, contohnya seperti di method _incrementCounter di atas
@@ -104,10 +112,26 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       /// 11. floating action button ini optional, kalau ga mau bisa dihilangin aja
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 20,right: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: _incrementCounter,
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            FloatingActionButton(
+              onPressed: _decrementCounter,
+              tooltip: 'Decrement',
+              child: const Text("-", style: TextStyle(color: Colors.white, fontSize: 30),),
+            )
+          ],
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
