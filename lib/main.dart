@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_with_aim2u/screens/counter_app_screen.dart';
 import 'package:learn_flutter_with_aim2u/screens/my_home_screen.dart';
+import 'package:learn_flutter_with_aim2u/screens/splash_screen.dart';
 
 /// 1. main() function ini adalah entry point aplikasi flutter,
 /// kadang disini ada kode inisiasi lainnya selain dari runApp()
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       /// 5. home => ini adalah home Route aplikasi kita
       /// Disini kita bisa menentukan route kita dengan beberapa cara,
       /// untuk saat ini kita pakai cara default saja dulu
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const SplashScreen(),
       // home: const CounterAppScreen(title: 'Ini Counter App'),
     );
   }
