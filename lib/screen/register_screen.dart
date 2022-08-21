@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learn_flutter_with_aim2u/const/number_consts.dart';
 import 'package:learn_flutter_with_aim2u/helper/alert_dialog.dart';
+import 'package:learn_flutter_with_aim2u/screen/my_home_screen.dart';
 import 'package:learn_flutter_with_aim2u/widget/custom_text_field.dart';
 import 'package:learn_flutter_with_aim2u/widget/suffix_icon_password_text_form_field.dart';
 
@@ -40,7 +41,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Expanded(
                 child: ElevatedButton(onPressed: (){
                   print('Yes');
-                  Navigator.of(context).pop();
+                  Navigator
+                      .of(context).push(
+                        MaterialPageRoute(builder: (c) => MyHomeScreen(name: nama ?? "-") ));
+                  // Navigator.of(context).pop();
                 }, child: const Text('Yes')),
               ),
             ],)
