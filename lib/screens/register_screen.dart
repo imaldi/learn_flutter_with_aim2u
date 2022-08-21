@@ -84,7 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           setState(() {
                             obscurePasswordText = !obscurePasswordText;
                           });
-                        },),
+                        },
+                      ),
                     ),
                     obscureText: obscurePasswordText,
                   ),
@@ -98,24 +99,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       suffixIcon: SuffixIconPasswordTextFormField(
                         obscurePasswordTextInWidget: obscurePasswordText,
                         onTap: () {
-                        setState(() {
-                          obscurePasswordText = !obscurePasswordText;
-                        });
-                      },),
+                          setState(() {
+                            obscurePasswordText = !obscurePasswordText;
+                          });
+                        },
+                      ),
                     ),
                     obscureText: obscurePasswordText,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                            onPressed: () {
-                              checkForm();
-                            },
-                            child: Text('Simpan')),
-                      ),
-                    ],
-                  )
+                  Flexible(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                              onPressed: () {
+                                checkForm();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.lightBlue[100],
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(sizeMedium),
+                                  ),
+                                  side: const BorderSide(
+                                      width: 3, color: Colors.blue),
+                                  minimumSize: Size(MediaQuery.of(context).size.width / 2, sizeHuge * 2)
+                              ),
+                              child: Text('Simpan',style: TextStyle(
+                                  fontSize: sizeBig,
+                                  color: Colors.blue[900]))),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               )),
         )));
