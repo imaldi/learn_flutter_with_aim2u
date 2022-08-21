@@ -41,10 +41,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Expanded(
                 child: ElevatedButton(onPressed: (){
                   print('Yes');
+                  Navigator.of(context).pop();
                   Navigator
-                      .of(context).push(
+                      .of(context).pushReplacement(
                         MaterialPageRoute(builder: (c) => MyHomeScreen(name: nama ?? "-") ));
-                  // Navigator.of(context).pop();
                 }, child: const Text('Yes')),
               ),
             ],)
