@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learn_flutter_with_aim2u/const/number_consts.dart';
-import 'package:learn_flutter_with_aim2u/widgets/custom_text_field.dart';
-import 'package:learn_flutter_with_aim2u/widgets/suffix_icon_password_text_form_field.dart';
+import 'package:learn_flutter_with_aim2u/helper/alert_dialog.dart';
+import 'package:learn_flutter_with_aim2u/widget/custom_text_field.dart';
+import 'package:learn_flutter_with_aim2u/widget/suffix_icon_password_text_form_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -17,11 +18,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? password;
   bool obscurePasswordText = true;
 
-  checkForm() {
+  checkForm(BuildContext context) {
     final form = _keyForm.currentState;
     if (form!.validate()) {
       setState(() {
         form.save();
+        myAlertDialog(context: context, alertDialog: AlertDialog(
+          title: const Text('Yakin?'),
+          content: const Text('Serius yakin?'),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              Expanded(
+                child: ElevatedButton(onPressed: (){
+                  print('No');
+                  Navigator.of(context).pop();
+                }, child: const Text('No')),
+              ),
+              const SizedBox(width: sizeMedium,),
+              Expanded(
+                child: ElevatedButton(onPressed: (){
+                  print('Yes');
+                  Navigator.of(context).pop();
+                }, child: const Text('Yes')),
+              ),
+            ],)
+          ],
+        ));
       });
     }
   }
@@ -113,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Expanded(
                           child: ElevatedButton(
                               onPressed: () {
-                                checkForm();
+                                checkForm(context);
                               },
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.lightBlue[100],

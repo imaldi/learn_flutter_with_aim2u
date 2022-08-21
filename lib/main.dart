@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter_with_aim2u/screens/counter_app_screen.dart';
-import 'package:learn_flutter_with_aim2u/screens/my_home_screen.dart';
-import 'package:learn_flutter_with_aim2u/screens/splash_screen.dart';
+import 'package:learn_flutter_with_aim2u/screen/counter_app_screen.dart';
+import 'package:learn_flutter_with_aim2u/screen/my_home_screen.dart';
+import 'package:learn_flutter_with_aim2u/screen/splash_screen.dart';
 
 /// 1. main() function ini adalah entry point aplikasi flutter,
 /// kadang disini ada kode inisiasi lainnya selain dari runApp()
