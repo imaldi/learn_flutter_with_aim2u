@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:learn_flutter_with_aim2u/const/number_consts.dart';
+import 'package:learn_flutter_with_aim2u/widgets/custom_text_field.dart';
+import 'package:learn_flutter_with_aim2u/widgets/suffix_icon_password_text_form_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -39,22 +42,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   Container(
-                    child: Text('Form Pendaftaran ${nama ?? ""}',
-                      style: const TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,),
-                  ),
-                  TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: const InputDecoration(
-                      label: Text('Nama Lengkap'),
-                      hintText: 'Nama Lengkap Elu',
+                    child: Text(
+                      'Form Pendaftaran ${nama ?? ""}',
+                      style: const TextStyle(fontSize: sizeBig),
+                      textAlign: TextAlign.center,
                     ),
+                  ),
+                  CustomTextField(
+                    labelText: 'Nama Lengkap',
+                    hintText: 'Nama Lengkap Elu Disini',
                     validator: (text) {
                       if (text!.isEmpty) {
                         return 'Nama tidak boleh kosong!';
                       }
-                      if(RegExp(r'[^a-zA-Z\s]+').hasMatch(text)) {
-                        return 'Nama hanya boleh berisi huruf';
+                      if (RegExp(r'[^a-zA-Z\s]+').hasMatch(text)) {
+                        return 'Nama hanya boleh berisi huruf dan spasi';
                       }
                       return null;
                     },
@@ -62,58 +64,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       nama = value;
                     },
                   ),
-                  TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (text){
-                      return (text!.length < 8) ? "Password minimal 8 karakter" : null;
+                  CustomTextField(
+                    labelText: 'Password',
+                    hintText: 'Password Anda',
+                    validator: (text) {
+                      return (text!.length < 3)
+                          ? "Password minimal 8 karakter"
+                          : null;
                     },
-                    onChanged: (text){
+                    onChanged: (text) {
                       setState(() {
                         password = text;
                       });
                     },
                     decoration: InputDecoration(
-                      label: Text('Password'),
-                      hintText: 'Password Anda',
-                      suffixIcon: InkWell(
-                        child: obscurePasswordText
-                            ? const Icon(Icons.remove_red_eye)
-                            : const Icon(Icons.remove_red_eye_outlined),
+                      suffixIcon: SuffixIconPasswordTextFormField(
+                        obscurePasswordTextInWidget: obscurePasswordText,
                         onTap: () {
                           setState(() {
                             obscurePasswordText = !obscurePasswordText;
                           });
-                        },
-                      ),
+                        },),
                     ),
                     obscureText: obscurePasswordText,
                   ),
-                  TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (text){
+                  CustomTextField(
+                    labelText: 'Password Confirmation',
+                    hintText: 'Ketik Ulang Password',
+                    validator: (text) {
                       return text == password ? null : "Password tidak cocok";
                     },
                     decoration: InputDecoration(
-                      label: const Text('Password Confirmation'),
-                      hintText: 'Ketik Ulang Password',
-                      suffixIcon: InkWell(
-                        child: obscurePasswordText
-                            ? const Icon(Icons.remove_red_eye)
-                            : const Icon(Icons.remove_red_eye_outlined),
+                      suffixIcon: SuffixIconPasswordTextFormField(
+                        obscurePasswordTextInWidget: obscurePasswordText,
                         onTap: () {
-                          setState(() {
-                            obscurePasswordText = !obscurePasswordText;
-                          });
-                        },
-                      ),
+                        setState(() {
+                          obscurePasswordText = !obscurePasswordText;
+                        });
+                      },),
                     ),
                     obscureText: obscurePasswordText,
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        checkForm();
-                      },
-                      child: Text('Simpan'))
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              checkForm();
+                            },
+                            child: Text('Simpan')),
+                      ),
+                    ],
+                  )
                 ],
               )),
         )));
