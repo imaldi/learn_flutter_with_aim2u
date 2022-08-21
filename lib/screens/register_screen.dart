@@ -11,6 +11,8 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _keyForm = GlobalKey<FormState>();
   String? nama;
+  String? password;
+  bool obscurePasswordText = true;
 
   checkForm() {
     final form = _keyForm.currentState;
@@ -37,28 +39,81 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   Container(
-                    child: Text('Form Pendaftaran ${nama ?? ""}'),
+                    child: Text('Form Pendaftaran ${nama ?? ""}',
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,),
                   ),
                   TextFormField(
-                    // autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: const InputDecoration(
                       label: Text('Nama Lengkap'),
                       hintText: 'Nama Lengkap Elu',
                     ),
                     validator: (text) {
                       if (text!.isEmpty) {
-                        return 'Nama Tidak Boleh Kosong!';
+                        return 'Nama tidak boleh kosong!';
+                      }
+                      if(RegExp(r'[^a-zA-Z\s]+').hasMatch(text)) {
+                        return 'Nama hanya boleh berisi huruf';
                       }
                       return null;
                     },
-                    onSaved: (value){
+                    onSaved: (value) {
                       nama = value;
                     },
                   ),
-
-                  ElevatedButton(onPressed: (){
-                    checkForm();
-                  }, child: Text('Simpan'))
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (text){
+                      return (text!.length < 8) ? "Password minimal 8 karakter" : null;
+                    },
+                    onChanged: (text){
+                      setState(() {
+                        password = text;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      label: Text('Password'),
+                      hintText: 'Password Anda',
+                      suffixIcon: InkWell(
+                        child: obscurePasswordText
+                            ? const Icon(Icons.remove_red_eye)
+                            : const Icon(Icons.remove_red_eye_outlined),
+                        onTap: () {
+                          setState(() {
+                            obscurePasswordText = !obscurePasswordText;
+                          });
+                        },
+                      ),
+                    ),
+                    obscureText: obscurePasswordText,
+                  ),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (text){
+                      return text == password ? null : "Password tidak cocok";
+                    },
+                    decoration: InputDecoration(
+                      label: const Text('Password Confirmation'),
+                      hintText: 'Ketik Ulang Password',
+                      suffixIcon: InkWell(
+                        child: obscurePasswordText
+                            ? const Icon(Icons.remove_red_eye)
+                            : const Icon(Icons.remove_red_eye_outlined),
+                        onTap: () {
+                          setState(() {
+                            obscurePasswordText = !obscurePasswordText;
+                          });
+                        },
+                      ),
+                    ),
+                    obscureText: obscurePasswordText,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        checkForm();
+                      },
+                      child: Text('Simpan'))
                 ],
               )),
         )));
